@@ -6,7 +6,7 @@ import AllExpensesScreen from "./screens/AllExpensesScreen";
 import { RootBottomTabsParamList, RootStackParamList } from "./constants/types";
 import RecentExpensesScreen from "./screens/RecentExpensesScreen";
 import ManageExpensesScreen from "./screens/ManageExpensesScreen";
-import { GlobalColors } from "./constants/styles";
+import { GlobalStyles } from "./constants/styles";
 import { Ionicons } from "@expo/vector-icons";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -16,12 +16,12 @@ const ExpensesOverview = () => {
   return (
     <BottomTabs.Navigator
       screenOptions={{
-        headerStyle: { backgroundColor: GlobalColors.border },
-        headerTintColor: GlobalColors.text,
+        headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
+        headerTintColor: 'white',
         tabBarStyle: {
-          backgroundColor: GlobalColors.border,
+          backgroundColor: GlobalStyles.colors.primary500,
         },
-        tabBarActiveTintColor: GlobalColors.text,
+        tabBarActiveTintColor: GlobalStyles.colors.accent500,
       }}
     >
       <BottomTabs.Screen

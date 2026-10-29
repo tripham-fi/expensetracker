@@ -1,9 +1,9 @@
-export interface RootStackParamList {
+export type RootStackParamList = {
   ManageExpenses: undefined;
   ExpensesOverview: undefined;
 };
 
-export interface RootBottomTabsParamList {
+export type RootBottomTabsParamList = {
   AllExpenses: undefined;
   RecentExpenses: undefined;
 };
