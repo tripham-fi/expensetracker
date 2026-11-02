@@ -1,6 +1,9 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer, NavigationProp } from "@react-navigation/native";
+import {
+  createNativeStackNavigator,
+  NativeStackNavigationProp,
+} from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 import AllExpensesScreen from "./screens/AllExpensesScreen";
 import { RootBottomTabsParamList, RootStackParamList } from "./constants/types";
@@ -8,6 +11,7 @@ import RecentExpensesScreen from "./screens/RecentExpensesScreen";
 import ManageExpensesScreen from "./screens/ManageExpensesScreen";
 import { GlobalStyles } from "./constants/styles";
 import { Ionicons } from "@expo/vector-icons";
+import IconButton from "./components/UI/IconButton";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const BottomTabs = createBottomTabNavigator<RootBottomTabsParamList>();
@@ -15,15 +19,29 @@ const BottomTabs = createBottomTabNavigator<RootBottomTabsParamList>();
 const ExpensesOverview = () => {
   return (
     <BottomTabs.Navigator
-      screenOptions={{
+      screenOptions={({ navigation }) => ({
         headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
-        headerTintColor: 'white',
+        headerTintColor: "white",
         tabBarStyle: {
           backgroundColor: GlobalStyles.colors.primary500,
         },
         tabBarActiveTintColor: GlobalStyles.colors.accent500,
-        tabBarInactiveTintColor: GlobalStyles.colors.text
-      }}
+        tabBarInactiveTintColor: GlobalStyles.colors.text,
+        headerRight: ({ tintColor }) => {
+          return (
+            <IconButton
+              icon="add"
+              size={24}
+              color={tintColor}
+              onPress={() => {
+                navigation
+                  .getParent<NativeStackNavigationProp<RootStackParamList>>()
+                  ?.navigate("ManageExpenses");
+              }}
+            />
+          );
+        },
+      })}
     >
       <BottomTabs.Screen
         name="RecentExpenses"
@@ -50,6 +68,8 @@ const ExpensesOverview = () => {
     </BottomTabs.Navigator>
   );
 };
+
+export type StackNavigation = NavigationProp<RootStackParamList>;
 
 export default function App() {
   return (
