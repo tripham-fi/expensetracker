@@ -15,7 +15,9 @@ export default function ExpenseItem({
 }: ExpenseItemProp) {
   const navigation = useNavigation<StackNavigation>();
   function pressHandler() {
-    navigation.navigate("ManageExpenses");
+    navigation.navigate("ManageExpenses", {
+      expenseId: id
+    });
   }
   return (
     <View style={styles.expenseItem}>

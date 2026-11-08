@@ -1,13 +1,8 @@
-import { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
-import { CompositeNavigationProp } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-
 export type RootStackParamList = {
-  ManageExpenses: undefined;
-  ExpensesOverview: undefined;
-  ExpensesDetail: {
-    expenseId: string;
+  ManageExpenses: {
+    expenseId?: string
   };
+  ExpensesOverview: undefined;
 };
 
 export type RootBottomTabsParamList = {
