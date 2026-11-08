@@ -1,6 +1,19 @@
 import { Text } from "react-native";
 import ExpensesOutput from "../components/ExpensesOutput/ExpensesOutput";
+import { ExpensesContext } from "../store/expenses-context";
+import { useContext } from "react";
+import { getDateMinusDay } from "../util/date";
 
 export default function RecentExpensesScreen() {
-  return <ExpensesOutput expernsesPeriod="Last 7 Days"/>
+  const expensesCtx = useContext(ExpensesContext);
+  const recentExpenses = expensesCtx?.expenses.filter((e) => {
+    const today = new Date();
+    const date7DaysAgo = getDateMinusDay(today, 7);
+    console.log(date7DaysAgo, e.date);
+    return e.date > date7DaysAgo;
+  });
+  
+  return (
+    <ExpensesOutput expenses={recentExpenses} expernsesPeriod="Last 7 Days" />
+  );
 }
