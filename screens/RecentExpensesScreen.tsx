@@ -9,11 +9,14 @@ export default function RecentExpensesScreen() {
   const recentExpenses = expensesCtx?.expenses.filter((e) => {
     const today = new Date();
     const date7DaysAgo = getDateMinusDay(today, 7);
-    console.log(date7DaysAgo, e.date);
-    return e.date > date7DaysAgo;
+    return e.date >= date7DaysAgo && e.date <= today;
   });
-  
+
   return (
-    <ExpensesOutput expenses={recentExpenses} expernsesPeriod="Last 7 Days" />
+    <ExpensesOutput
+      expenses={recentExpenses}
+      expernsesPeriod="Last 7 Days"
+      fallbackText="No expenses registered for the last 7 days"
+    />
   );
 }
