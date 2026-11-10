@@ -13,11 +13,11 @@ import { GlobalStyles } from "../../constants/styles";
 type Props = {
   children: ReactNode;
   onPress: () => void;
-  mode: "flat" | "normal";
+  mode?: "flat" | "normal";
   style?: StyleProp<TextStyle | ViewStyle>;
 };
 
-export default function Button({ children, onPress, mode, style }: Props) {
+export default function Button({ children, onPress, mode = 'normal', style }: Props) {
   return (
     <View style={style}>
       <Pressable

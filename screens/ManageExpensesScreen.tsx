@@ -6,6 +6,7 @@ import IconButton from "../components/UI/IconButton";
 import { GlobalStyles } from "../constants/styles";
 import Button from "../components/UI/Button";
 import { ExpensesContext } from "../store/expenses-context";
+import ExpenseForm from "../components/ManageExpense/ExpenseForm";
 
 type props = NativeStackScreenProps<RootStackParamList, "ManageExpenses">;
 
@@ -48,11 +49,12 @@ export default function ManageExpensesScreen({ route, navigation }: props) {
   }
   return (
     <View style={styles.container}>
+      <ExpenseForm />
       <View style={styles.buttons}>
         <Button mode="flat" onPress={cancelHandler} style={styles.button}>
           Cancel
         </Button>
-        <Button mode="normal" onPress={confirmHandler} style={styles.button}>
+        <Button onPress={confirmHandler} style={styles.button}>
           {isEditing ? "Update" : "Add"}
         </Button>
       </View>
