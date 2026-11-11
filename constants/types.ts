@@ -1,6 +1,6 @@
 export type RootStackParamList = {
   ManageExpenses: {
-    expenseId?: string
+    expenseId?: string;
   };
   ExpensesOverview: undefined;
 };
@@ -12,6 +12,12 @@ export type RootBottomTabsParamList = {
 
 export interface expense {
   id: string;
+  description: string;
+  amount: number;
+  date: Date;
+}
+
+export interface ExpenseData {
   description: string;
   amount: number;
   date: Date;

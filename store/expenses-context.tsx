@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useReducer } from "react";
-import { expense } from "../constants/types";
+import { expense, ExpenseData } from "../constants/types";
 
 const DUMMY_EXPENSES: expense[] = [
   {
@@ -63,12 +63,6 @@ const DUMMY_EXPENSES: expense[] = [
     date: new Date("2026-11-03"),
   },
 ];
-
-type ExpenseData = {
-  description: string;
-  amount: number;
-  date: Date;
-};
 
 type ExpensesContextType = {
   expenses: expense[];

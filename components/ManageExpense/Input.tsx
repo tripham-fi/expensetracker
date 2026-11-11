@@ -1,29 +1,33 @@
 import {
+  StyleProp,
   StyleSheet,
   Text,
   TextInput,
   TextInputProps,
   View,
+  ViewStyle,
 } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
 
 interface InputProp extends TextInputProps {
   label: string;
+  propStyle?: StyleProp<ViewStyle>;
 }
 
 export default function Input({
   label,
   multiline,
   style,
+  propStyle,
   ...textInputConfigs
 }: InputProp) {
   return (
-    <View style={[styles.inputContainer, style]}>
+    <View style={[styles.inputContainer, propStyle]}>
       <Text style={styles.label}>{label}</Text>
       <TextInput
         {...textInputConfigs}
         multiline={multiline}
-        style={[styles.input, multiline && styles.inputMultiline]}
+        style={[styles.input, multiline && styles.inputMultiline, style]}
       />
     </View>
   );

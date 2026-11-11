@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { StyleSheet, Text, View } from "react-native";
-import { RootStackParamList } from "../constants/types";
+import { expense, ExpenseData, RootStackParamList } from "../constants/types";
 import { useContext, useLayoutEffect } from "react";
 import IconButton from "../components/UI/IconButton";
 import { GlobalStyles } from "../constants/styles";
@@ -27,37 +27,26 @@ export default function ManageExpensesScreen({ route, navigation }: props) {
     }
     navigation.goBack();
   }
+
   function cancelHandler() {
     navigation.goBack();
   }
 
-  function confirmHandler() {
+  function confirmHandler(data: ExpenseData) {
     if (isEditing) {
-      expenseCtx?.updateExpense(expenseId, {
-        amount: 29.99,
-        description: "Testing updated",
-        date: new Date(),
-      });
+      expenseCtx?.updateExpense(expenseId, data);
     } else {
-      expenseCtx?.addExpense({
-        amount: 99.99,
-        description: "Testing adding",
-        date: new Date(),
-      });
+      expenseCtx?.addExpense(data);
     }
     navigation.goBack();
   }
   return (
     <View style={styles.container}>
-      <ExpenseForm />
-      <View style={styles.buttons}>
-        <Button mode="flat" onPress={cancelHandler} style={styles.button}>
-          Cancel
-        </Button>
-        <Button onPress={confirmHandler} style={styles.button}>
-          {isEditing ? "Update" : "Add"}
-        </Button>
-      </View>
+      <ExpenseForm
+        submitLabel={isEditing ? "Update" : "Add"}
+        onCancel={cancelHandler}
+        onConfirm={confirmHandler}
+      />
       {isEditing && (
         <View style={styles.deleteContainer}>
           <IconButton
@@ -84,14 +73,5 @@ const styles = StyleSheet.create({
     borderTopWidth: 2,
     borderTopColor: GlobalStyles.colors.primary200,
     alignItems: "center",
-  },
-  buttons: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  button: {
-    minWidth: 120,
-    marginHorizontal: 8,
   },
 });
